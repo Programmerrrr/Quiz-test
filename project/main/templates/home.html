@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+
+
+<div class="savollar">
+    {% for category in categories %}
+        <div class="boxx" style="padding-top:20px ;">{{category.category_name}}  ||| {{category.count}} testlar soni ||| {{category.time}} vaqti ||| {{category.passing_score}} <a href="{% url 'test_detail' category.id %}" style="margin-left: 20%;" class="startbutton">Boshlash</a></div>
+    {% endfor %}
+</div>
+
+{% endblock content %}

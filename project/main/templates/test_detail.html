@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<div class="container-jami">
+
+
+    <div class="pagination">
+        <span class="step-links">
+            <!-- {% if products.has_previous %}
+                <a href="?page={{ products.previous_page_number }}">back</a>
+            {% else %}
+                <a href="" disabled>back</a>
+
+            {% endif %}
+    
+            <span class="current">
+                 {{ products.number }} of {{ products.paginator.num_pages }}.
+            </span>
+    
+            {% if products.has_next %}
+                <a href="?page={{ products.next_page_number }}">next</a>
+            {% endif %} -->
+
+            <ul class="pagination nav navbar-nav navbar-pagii">
+                {% if products.has_previous %}
+                        <li><a href="?page={{ products.previous_page_number }}">  < </a></li>
+                {% else %}
+                        <li><a href="" style="color: rgb(177, 177, 177);"> <  </a></li>
+                {% endif %}
+                {% for page in products.paginator.page_range %}
+                    <li class="{% if products.number == page  %}activee{% endif %}"><a href="?page={{page }}">{{ page }}</a></li>
+                {% endfor %}
+            
+                {% if products.has_next %}
+                    <li> <a href="?page={{ products.next_page_number }}"> > </a></li>
+                {% else %}
+                    <li> <a href="" disabled style="color: rgb(177, 177, 177);"> >  </a></li>
+                {% endif %}
+             </ul>
+        </span>
+    </div>
+
+    <br>
+    <hr>
+    <form action="" method="post">
+        {% csrf_token %}
+
+
+    
+    <div class="savolllar">
+        {% for product in products  %}
+
+        <div class="savol-detail">
+            <h1>{{product.question_name}}</h1>
+            
+
+
+                {% for answer in product.answerquestion.all %}
+
+                <div class="form-check">
+                    <input class="form-check-input" type="radio" name="answername" id="flexRadioDefault1">
+                    <label class="form-check-label" for="flexRadioDefault1">
+                      {{answer.answer}}
+                    </label>
+                </div>
+                
+                {% endfor %}
+                
+           
+        </div>
+
+        <hr>
+        
+        {% endfor %}
+        
+    </div>
+
+    <button style="border: none; background-color: black; color: #fff; border-radius: 2px; padding: 10px;" type="submit"> Tugatish </button>
+
+    </form>
+</div>
+
+{% comment %} <div class="savollar">
+    {% for test in tests %}
+        <div class="boxx" style="padding-top:20px ;">  {{test.name}}  |||   {{test.count}} tests ||| {{test.time}} time  ||| {{test.passing_score}}%        <a href="#" style="margin-left: 20%;" class="startbutton">Boshlash</a></div>
+    {% endfor %}
+</div> {% endcomment %}
+
+{% endblock content %}
